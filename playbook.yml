@@ -1,0 +1,17 @@
+---
+- name: WordPress WooCommerce LEMP Deployment
+  hosts: web
+  become: true
+
+  vars_files:
+    - group_vars/all.yml
+
+  roles:
+    - common
+    - php
+    - mysql
+    - nginx
+    - wordpress
+    - woocommerce
+    - certbot
+    - ufw
