@@ -1,0 +1,9 @@
+domain_name: "hamza-qureshi.duckdns.org"
+
+admin_user: "hamza"
+wp_db_name: "wordpress_db"
+wp_db_user: "wp_user"
+wp_db_password: "strongpassword"
+wp_site_title: "WooCommerce Store"
+
+ssl_email: "ih20gt@gmail.com"
