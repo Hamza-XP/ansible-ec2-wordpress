@@ -1,0 +1,55 @@
+---
+- name: Configure WordPress Server
+  hosts: webservers
+  become: yes
+  gather_facts: true
+  vars_files:
+    - ../group_vars/all.yml
+  
+  pre_tasks:
+    - name: Wait for server to be ready
+      wait_for_connection:
+        delay: 10
+        timeout: 300
+    
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+  roles:
+    - role: server-setup
+      tags: [setup, base]
+    
+    - role: security  
+      tags: [security, hardening]
+    
+    - role: lemp-stack
+      tags: [lemp, nginx, mysql, php]
+    
+    - role: wordpress
+      tags: [wordpress, cms]
+    
+    - role: ssl
+      tags: [ssl, https]
+
+  post_tasks:
+    - name: Verify WordPress installation
+      uri:
+        url: "http://{{ ansible_default_ipv4.address }}"
+        method: GET
+        status_code: [200, 301, 302]
+        timeout: 30
+      delegate_to: localhost
+      retries: 3
+      delay: 10
+      
+    - name: Display deployment information
+      debug:
+        msg:
+          - "====== DEPLOYMENT COMPLETE ======"
+          - "WordPress URL: https://{{ domain_name }}"  
+          - "Admin URL: https://{{ domain_name }}/wp-admin"
+          - "Admin User: {{ wp_admin_user }}"
+          - "Server IP: {{ ansible_default_ipv4.address }}"
+          - "=================================="
