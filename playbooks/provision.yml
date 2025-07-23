@@ -1,0 +1,25 @@
+---
+- name: Provision EC2 Instance for WordPress
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../group_vars/all.yml
+  
+  tasks:
+    - name: Provision EC2 infrastructure
+      include_role:
+        name: ec2-provision
+      tags: [ec2, provision]
+    
+    - name: Wait for EC2 instance to be accessible
+      wait_for:
+        host: "{{ hostvars['localhost']['ec2_public_ip'] }}"
+        port: 22
+        delay: 30
+        timeout: 300
+        state: started
+      when: hostvars['localhost']['ec2_public_ip'] is defined
+      
+    - name: Refresh inventory to include new EC2 instance
+      meta: refresh_inventory
