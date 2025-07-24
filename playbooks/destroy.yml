@@ -1,0 +1,37 @@
+---
+- name: Destroy WordPress Infrastructure
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../group_vars/all.yml
+  
+  tasks:
+    - name: Terminate EC2 instances
+      amazon.aws.ec2_instance:
+        state: absent
+        filters:
+          "tag:Name": "wordpress-{{ environment | default('dev') }}"
+          "instance-state-name": ["running", "stopped"]
+        region: "{{ aws_region }}"
+      
+    - name: Delete security group
+      amazon.aws.ec2_security_group:
+        name: "wordpress-sg-{{ environment | default('dev') }}"
+        state: absent
+        region: "{{ aws_region }}"
+      ignore_errors: yes
+    
+    - name: Remove DNS record
+      amazon.aws.route53:
+        state: absent
+        zone: "{{ dns_zone }}"
+        record: "{{ domain_name }}"
+        type: A
+      when: dns_zone is defined and domain_name is defined
+      ignore_errors: yes
+    
+    - name: Clean up inventory
+      file:
+        path: inventory/hosts
+        state: absent
