@@ -1,10 +1,16 @@
 # WordPress on EC2 via Ansible - Professional Deployment Solution
 
-[![Ansible](https://img.shields.io/badge/ansible-2.10%2B-red.svg)](https://www.ansible.com/)
-[![Terraform](https://img.shields.io/badge/terraform-1.5%2B-blue.svg)](https://www.terraform.io/)
-[![WordPress](https://img.shields.io/badge/wordpress-6.0%2B-blue.svg)](https://wordpress.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![EC2](https://img.shields.io/badge/AWS-EC2-orange.svg)](https://aws.amazon.com/ec2/)
+[![Ansible](https://img.shields.io/badge/Ansible-2.10%2B-red?logo=ansible)](https://www.ansible.com/)
+[![Terraform](https://img.shields.io/badge/Terraform-1.5%2B-7B42BC?logo=terraform)](https://www.terraform.io/)
+[![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759B?logo=wordpress)](https://wordpress.org/)
+[![WooCommerce](https://img.shields.io/badge/WooCommerce-Latest-96588A?logo=woocommerce)](https://woocommerce.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-Latest-009639?logo=nginx)](https://nginx.org/)
+[![PHP](https://img.shields.io/badge/PHP-8.1-777BB4?logo=php)](https://www.php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql)](https://www.mysql.com/)
+[![AWS EC2](https://img.shields.io/badge/AWS-EC2-orange?logo=amazon-aws)](https://aws.amazon.com/ec2/)
+[![Certbot](https://img.shields.io/badge/Certbot-SSL-lightgrey?logo=letsencrypt)](https://certbot.eff.org/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Automation-2088FF?logo=github-actions)](https://github.com/features/actions)
+
 
 ## Project Overview
 This repository provides an automated, production-grade solution for deploying WordPress with WooCommerce capabilities on AWS EC2 instances. The infrastructure is provisioned using Terraform/Ansible with a focus on:
